@@ -20,11 +20,11 @@ const app = express();
 // 5. Middleware 
 // Allow React (port 3000) to call this server
 app.use(cors({
-origin: [
-'http://localhost:3000', // local dev
-'https://thefolio-frontend.vercel.app', // production (update after Step 8)
-],
-credentials: true
+  origin: [
+    'http://localhost:3000',
+    'https://thefolio-frontend.vercel.app'
+  ],
+  credentials: true
 }));
 // Parse incoming JSON request bodies
 app.use(express.json());
