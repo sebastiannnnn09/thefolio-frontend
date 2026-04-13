@@ -1,0 +1,583 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700;900&display=swap');
+
+:root {
+  --cyber-yellow: #fcee0a;
+  --cyber-pink: #e3325b;
+  --cyber-blue: #ead516; /* Adjusted to a classic neon cyan */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ... keep your fonts and :root variables as they are ... */
+
+/* src/styles/style.css */
+
+body {
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Rajdhani', sans-serif;
+  color: white;
+  overflow: hidden;
+  background-color: #050505; /* Keeps a dark base while loading */
+  transition: background 0.5s ease-in-out, color 0.3s ease;
+}
+
+/* Delete the url() lines here to prevent build errors */
+body.light-mode {
+  color: #121212;
+}
+
+/* ... keep the rest of your CSS exactly the same ... */
+
+.main-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 5;
+}
+
+/* --- NAVIGATION --- */
+.cyber-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 60px;
+}
+
+.logo .highlight {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--cyber-yellow);
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--cyber-blue);
+  border-bottom: 2px solid var(--cyber-blue);
+}
+
+/* --- HERO SECTION --- */
+.hero {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 60px;
+}
+
+.hero-title {
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 0.9;
+  margin: 20px 0;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 0px var(--cyber-pink);
+}
+
+.highlight {
+  background-color: var(--cyber-yellow);
+  color: black;
+  padding: 2px 12px;
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+  display: inline-block;
+}
+
+.hazard-stripe {
+  height: 12px;
+  width: 100%;
+  max-width: 400px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--cyber-yellow),
+    var(--cyber-yellow) 10px,
+    black 10px,
+    black 20px
+  );
+}
+
+/* --- BUTTONS & HUD --- */
+.main-button {
+  background: var(--cyber-pink);
+  color: white;
+  padding: 18px 50px;
+  font-weight: 900;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+  clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+  box-shadow: 0 0 20px rgba(227, 50, 91, 0.5);
+  transition: 0.3s;
+}
+
+.main-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px var(--cyber-pink);
+}
+
+.hud-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 30px;
+}
+
+.social-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--cyber-blue);
+  font-weight: bold;
+  border-right: 3px solid var(--cyber-blue);
+  padding-right: 15px;
+}
+
+.scroll-text {
+  writing-mode: vertical-rl;
+  color: var(--cyber-yellow);
+  letter-spacing: 5px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+/* --- THEME SWITCH --- */
+.switch-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 22px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #1a1a1a;
+    border: 1px solid var(--cyber-yellow);
+    transition: .4s;
+}
+
+input:checked + .slider { background-color: var(--cyber-pink); }
+
+/* --- GAMEPLAY IMAGES --- */
+.hero-gallery {
+    display: flex; 
+    gap: 15px; 
+    margin: 25px 0;
+}
+
+.hero-image {
+    width: 160px;
+    height: 90px;
+    object-fit: cover;
+    border: 1px solid var(--cyber-blue);
+    clip-path: polygon(10% 0, 100% 0, 100% 85%, 90% 100%, 0 100%, 0 15%);
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hero-image:hover {
+    transform: scale(1.15) rotate(2deg);
+    box-shadow: 0 0 20px var(--cyber-blue);
+    z-index: 10;
+}
+
+.scanlines {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+              linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+footer {
+    padding: 20px 60px;
+    border-top: 1px solid rgba(0, 240, 255, 0.1);
+    font-size: 0.8rem;
+    color: #666;
+    background: rgba(0,0,0,0.3);
+}
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700;900&display=swap');
+
+:root {
+  --cyber-yellow: #fcee0a;
+  --cyber-pink: #e3325b;
+  --cyber-blue: #eaf113;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Rajdhani', sans-serif;
+  color: white;
+  overflow-x: hidden;
+  background-color: #050505;
+  transition: color 0.3s ease;
+}
+
+/* Text color changes for Light Mode */
+body.light-mode {
+  color: #121212;
+}
+
+body.light-mode .cyber-description, 
+body.light-mode footer {
+  color: #333;
+}
+
+/* --- Layout Components --- */
+.main-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 5;
+  position: relative;
+}
+
+.hero-title {
+  font-size: 4.5rem;
+  font-weight: 900;
+  text-shadow: 3px 3px 0px var(--cyber-pink);
+}
+
+.highlight {
+  background-color: var(--cyber-yellow);
+  color: black;
+  padding: 2px 10px;
+  font-weight: 900;
+}
+
+.hazard-stripe {
+  height: 10px;
+  width: 100%;
+  max-width: 400px;
+  background: repeating-linear-gradient(45deg, var(--cyber-yellow), var(--cyber-yellow) 10px, #000 10px, #000 20px);
+  margin: 10px 0;
+}
+
+.hero-gallery {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.hero-image {
+  width: 180px;
+  height: 100px;
+  object-fit: cover;
+  border: 1px solid var(--cyber-blue);
+  clip-path: polygon(10% 0, 100% 0, 100% 85%, 90% 100%, 0 100%, 0 15%);
+}
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 45px; /* Increased gap between links */
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--cyber-yellow);
+  font-weight: 900;
+  letter-spacing: 3px;
+  /* Increased from 0.9rem to 1.2rem */
+  font-size: 1.2rem; 
+  transition: 0.3s;
+  padding: 10px 15px;
+}
+
+/* The specialized "REGISTER" button in the nav */
+.nav-btn {
+  border: 2px solid var(--cyber-blue);
+  padding: 12px 25px !important;
+  background: rgba(0, 240, 255, 0.1);
+  /* Cut corners for the nav button too */
+  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%, 0 35%);
+}
+/* Update the inline styles in About.js or add this to style.css */
+.quiz-option-btn {
+  width: 100%;
+  padding: 20px !important; /* Thicker touch targets */
+  font-size: 1.1rem !important;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 2px solid var(--cyber-blue) !important;
+  background: rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+}
+
+.quiz-option-btn:hover {
+  background: rgba(0, 240, 255, 0.2) !important;
+  padding-left: 30px !important; /* Slide-in effect on hover */
+}
+.main-button {
+  background: var(--cyber-pink);
+  color: white;
+  /* Increased from 18px 50px to 22px 70px */
+  padding: 22px 70px; 
+  font-weight: 900;
+  /* Increased from 1.1rem to 1.4rem */
+  font-size: 1.4rem; 
+  border: none;
+  cursor: pointer;
+  letter-spacing: 4px; /* Added more space for that HUD look */
+  text-transform: uppercase;
+  
+  /* Adjusted clip-path for the larger size */
+  clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+  box-shadow: 0 0 25px rgba(227, 50, 91, 0.6);
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.main-button:hover {
+  transform: scale(1.1); /* Slightly more pop on hover */
+  box-shadow: 0 0 40px var(--cyber-pink);
+  background: white;
+  color: var(--cyber-pink);
+}
+/* --- MEGA INFO SECTION --- */
+.mega-info-section {
+  margin: 60px 0;
+  width: 100%;
+}
+
+.glitch-title {
+  font-size: 4rem; /* Massive size */
+  font-weight: 900;
+  color: var(--cyber-yellow);
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  margin: 20px 0;
+  text-shadow: 4px 4px 0px var(--cyber-pink);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.stat-box {
+  background: rgba(0, 240, 255, 0.05);
+  border-left: 5px solid var(--cyber-blue);
+  padding: 30px;
+  transition: 0.3s;
+  cursor: crosshair;
+}
+
+.stat-box:hover {
+  background: rgba(0, 240, 255, 0.15);
+  transform: translateX(10px);
+  box-shadow: -10px 0px 20px rgba(0, 240, 255, 0.3);
+}
+
+.stat-header {
+  display: block;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--cyber-blue);
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+
+.stat-desc {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.4;
+  opacity: 0.8;
+}
+
+/* Light Mode Adjustment */
+body.light-mode .stat-desc {
+  color: #222;
+}
+body.light-mode .stat-box {
+  background: rgba(0, 0, 0, 0.05);
+}
+.boot-loader-container {
+  width: 350px; 
+  height: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--cyber-pink);
+  
+  /* THIS LINE CENTERS THE BAR ITSELF */
+  margin: 20px auto; 
+  
+  position: relative;
+  overflow: visible;
+}
+
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Ensures the Glitch Title and Bar stay aligned */
+  justify-content: center;
+  width: 100%;
+}
+/* --- TACTICAL LOGOUT BUTTON --- */
+.nav-btn-exit {
+  background: transparent;
+  color: var(--cyber-pink) !important; /* Force pink color */
+  border: 1px solid var(--cyber-pink);
+  padding: 8px 20px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.3s skew(10deg);
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 5px rgba(227, 50, 91, 0.2);
+}
+
+.nav-btn-exit:hover {
+  background: var(--cyber-pink);
+  color: white !important;
+  box-shadow: 0 0 20px var(--cyber-pink), 
+              0 0 40px rgba(227, 50, 91, 0.4);
+  transform: translateY(-2px);
+  text-shadow: 0 0 5px white;
+}
+
+/* Optional: Adding a "Disconnect" icon effect before the text */
+.nav-btn-exit::before {
+  content: '⏻';
+  margin-right: 8px;
+  font-size: 0.9rem;
+}
+
+/* Ensure the Logout button stays sharp on the right */
+.nav-links li:last-child {
+  margin-left: 15px;
+}
+.nav-btn-exit {
+    border: 1px solid var(--cyber-pink);
+    color: var(--cyber-pink);
+    padding: 5px 15px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.nav-btn-exit:hover {
+    background: var(--cyber-pink);
+    color: black;
+    box-shadow: 0 0 10px var(--cyber-pink);
+}
+/* Container for the Switch */
+.switch-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.switch-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.7rem;
+    color: var(--cyber-blue);
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+/* The Box */
+.cyber-switch {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 24px;
+}
+
+.cyber-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The Slider Background */
+.cyber-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--cyber-blue);
+    transition: .4s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 5px rgba(0, 240, 255, 0.2);
+}
+
+.slider-text {
+    font-size: 0.6rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: bold;
+    color: var(--cyber-blue);
+    letter-spacing: 1px;
+    z-index: 1;
+}
+
+/* The Moving Indicator (The "Handle") */
+.cyber-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 30px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--cyber-blue);
+    transition: .4s;
+}
+
+/* LIGHT MODE STATE (When checked) */
+.cyber-switch input:checked + .cyber-slider {
+    border-color: var(--cyber-yellow);
+    box-shadow: 0 0 10px rgba(255, 225, 0, 0.3);
+}
+
+.cyber-switch input:checked + .cyber-slider:before {
+    transform: translateX(32px);
+    background-color: var(--cyber-yellow);
+}
+
+.cyber-switch input:checked + .cyber-slider .slider-text {
+    color: var(--cyber-yellow);
+}
+
+/* Hover Glow */
+.cyber-slider:hover {
+    box-shadow: 0 0 10px var(--cyber-blue);
+}
